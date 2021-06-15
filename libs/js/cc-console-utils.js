@@ -134,6 +134,7 @@ const initConsoleUtil = function () {
         let rawCacheData = cc.loader._cache;
         let cacheData = [];
         let totalTextureSize = 0;
+        let cacheMap = {};
         for (let k in rawCacheData) {
             let item = rawCacheData[k];
             let preview = '';
@@ -153,7 +154,10 @@ const initConsoleUtil = function () {
                 id: item._uuid,
                 size: formatSize
             });
+
+            cacheMap[type] = (cacheMap[type] || 0) + 1;
         }
+        console.log(cacheMap);
         let cacheTitle = `缓存 [文件总数:${cacheData.length}][纹理缓存:${totalTextureSize.toFixed(2) + 'M'}]`;
         return [cacheData, cacheTitle];
     }
